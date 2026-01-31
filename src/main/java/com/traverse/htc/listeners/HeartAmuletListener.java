@@ -14,10 +14,12 @@ import com.hypixel.hytale.server.core.modules.entitystats.modifier.Modifier;
 import com.hypixel.hytale.server.core.modules.entitystats.modifier.StaticModifier;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import com.hypixel.hytale.server.core.inventory.container.ItemStackItemContainer;
 
 public class HeartAmuletListener {
 
-    private static final String HEART_CANISTER_ITEM_ID = "Heart_Amulet";
+    private static final String HEART_AMULET_ITEM_ID = "Heart_Amulet";
+    private static final String RED_HEART_CANISTER_ITEM_ID = "Red_Heart_Canister";
     private static final String MODIFIER_KEY = "HeartTale_Amulet";
     private static final double HEALTH_PER_CONTAINER = 2.0;
 
@@ -38,8 +40,17 @@ public class HeartAmuletListener {
         for (short slot = 0; slot < utilitySlots.getCapacity(); slot++) {
             ItemStack item = utilitySlots.getItemStack(slot);
 
-            if (item != null && isHeartCanister(item)) {
-                totalCanisters += item.getQuantity();
+            if (item != null && isHeartAmulet(item)) {
+                // Check contents of the amulet
+                ItemContainer container = ItemStackItemContainer.getContainer(utilitySlots, slot);
+                if (container != null) {
+                    for (short cSlot = 0; cSlot < container.getCapacity(); cSlot++) {
+                        ItemStack innerItem = container.getItemStack(cSlot);
+                        if (innerItem != null && isRedHeartCanister(innerItem)) {
+                            totalCanisters += innerItem.getQuantity();
+                        }
+                    }
+                }
             }
         }
 
@@ -73,7 +84,11 @@ public class HeartAmuletListener {
         });
     }
 
-    private boolean isHeartCanister(ItemStack item) {
-        return item.getItemId().equals(HEART_CANISTER_ITEM_ID);
+    private boolean isHeartAmulet(ItemStack item) {
+        return item.getItemId().equals(HEART_AMULET_ITEM_ID);
+    }
+
+    private boolean isRedHeartCanister(ItemStack item) {
+        return item.getItemId().equals(RED_HEART_CANISTER_ITEM_ID);
     }
 }
