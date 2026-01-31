@@ -1,0 +1,20 @@
+{
+  "Model": "Resources/Ingredients/red_heart.blockymodel",
+  "Texture": "Resources/Ingredients/red_heart_canister.png",
+  "Icon": "Icons/ItemsGenerated/Mini_Red_Heart.png",
+  "IconProperties": {
+    "Scale": 2.5,
+    "Rotation": [
+      0,
+      0,
+      0
+    ],
+    "Translation": [
+      0,
+      -3
+    ]
+  },
+  "Scale": 2.5,
+  "UsePlayerAnimations": true,
+  "PlayerAnimationsId": "Item"
+}

@@ -1,0 +1,72 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Utility_Leather_Quiver.name"
+  },
+  "Categories": [
+    "Items.Tools"
+  ],
+  "Icon": "Icons/ItemsGenerated/Utility_Leather_Quiver.png",
+  "Quality": "Common",
+  "ItemLevel": 20,
+  "Recipe": {
+    "Input": [
+      {
+        "ResourceTypeId": "Wood_Trunk",
+        "Quantity": 2
+      },
+      {
+        "ItemId": "Ingredient_Bar_Iron",
+        "Quantity": 4
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Type": "Crafting",
+        "Id": "ArmorBench"
+      }
+    ]
+  },
+  "Model": "Items/Chest/heart_amulet.blockymodel",
+  "Texture": "Items/Chest/heart_amulet.png",
+  "IconProperties": {
+    "Scale": 0.51,
+    "Rotation": [
+      22.5,
+      45,
+      22.5
+    ],
+    "Translation": [
+      0,
+      -57
+    ]
+  },
+  "Tags": {
+    "Family": [
+      "Leather"
+    ],
+    "Type": [
+      "Utility"
+    ]
+  },
+  "MaxStack": 1,
+  "Utility": {
+    "Usable": true
+  },
+  "Container": {
+    "Capacity": 1,
+    "GlobalFilter": "AllowAll",
+    "ItemTag": "Family=Arrow"
+  },
+  "Interactions": {
+    "Secondary": {
+      "Interactions": [
+        {
+          "Type": "OpenItemStackContainer"
+        }
+      ]
+    }
+  },
+  "UsePlayerAnimations": false,
+  "ClipsGeometry": true,
+  "DropOnDeath": true
+}

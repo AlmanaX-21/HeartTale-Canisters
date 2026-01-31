@@ -1,0 +1,23 @@
+{
+  "Model": "Resources/Ingredients/red_heart_canister.blockymodel",
+  "Texture": "Resources/Ingredients/red_heart_canister.png",
+  "Scale": 2.5,
+  "Icon": "Icons/ItemsGenerated/Red_Heart_Canister.png",
+  "IconProperties": {
+    "Scale": 2.5,
+    "Rotation": [
+      0,
+      0,
+      0
+    ],
+    "Translation": [
+      0,
+      -4
+    ]
+  },
+  "Tags": {
+    "HeartCanister": []
+  },
+  "MaxStack": 10,
+  "PlayerAnimationsId": "Item"
+}

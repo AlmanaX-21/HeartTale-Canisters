@@ -1,0 +1,70 @@
+{
+  "TranslationProperties": {
+    "Name": "server.items.Utility_Heart_Amulet.name"
+  },
+  "Categories": [
+    "Items.Tools"
+  ],
+  "Icon": "Icons/ItemsGenerated/Heart_Amulet.png",
+  "Quality": "Common",
+  "ItemLevel": 10,
+  "Recipe": {
+    "Input": [
+      {
+        "ItemId": "Ingredient_Bar_Iron",
+        "Quantity": 2
+      },
+      {
+        "ItemId": "Ingredient_Fibre",
+        "Quantity": 4
+      }
+    ],
+    "BenchRequirement": [
+      {
+        "Type": "Crafting",
+        "Id": "Workbench"
+      }
+    ]
+  },
+  "Model": "Items/Chest/heart_amulet.blockymodel",
+  "Texture": "Items/Chest/heart_amulet.png",
+  "IconProperties": {
+    "Scale": 2.4,
+    "Rotation": [
+      0,
+      0,
+      0
+    ],
+    "Translation": [
+      0,
+      -4
+    ]
+  },
+  "Tags": {
+    "Type": [
+      "Utility"
+    ]
+  },
+  "MaxStack": 1,
+  "Utility": {
+    "Usable": true,
+    "Compatible": true
+  },
+  "UsePlayerAnimations": false,
+  "ClipsGeometry": true,
+  "DropOnDeath": true,
+  "Container": {
+    "Capacity": 1,
+    "ItemTag": "HeartCanister"
+  },
+  "Interactions": {
+    "Secondary": {
+      "Interactions": [
+        {
+          "Type": "OpenItemStackContainer"
+        }
+      ]
+    }
+  },
+  "Scale": 2
+}
