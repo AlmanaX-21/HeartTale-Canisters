@@ -10,39 +10,41 @@ import com.hypixel.hytale.server.core.inventory.ItemStack;
 import com.hypixel.hytale.server.core.inventory.container.ItemContainer;
 import com.hypixel.hytale.server.core.modules.entitystats.EntityStatMap;
 import com.hypixel.hytale.server.core.modules.entitystats.asset.DefaultEntityStatTypes;
+import com.hypixel.hytale.server.core.modules.entitystats.modifier.Modifier;
+import com.hypixel.hytale.server.core.modules.entitystats.modifier.StaticModifier;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 
 public class HeartAmuletListener {
 
-    private static final String HEART_CANISTER_ITEM_ID = "Red_Heart_Canister";
+    private static final String HEART_CANISTER_ITEM_ID = "Heart_Amulet";
+    private static final String MODIFIER_KEY = "HeartTale_Amulet";
     private static final double HEALTH_PER_CONTAINER = 2.0;
 
     public void onInventoryChanged(LivingEntityInventoryChangeEvent event) {
         LivingEntity entity = event.getEntity();
-        if(!(entity instanceof Player)) return;
+        if (!(entity instanceof Player))
+            return;
 
         Player player = (Player) entity;
         updatePlayerMaxHealth(player);
     }
 
     private void updatePlayerMaxHealth(Player player) {
-       Inventory inventory = player.getInventory();
+        Inventory inventory = player.getInventory();
         ItemContainer utilitySlots = inventory.getUtility();
 
         int totalCanisters = 0;
-        for(short slot = 0; slot < utilitySlots.getCapacity(); slot++) {
+        for (short slot = 0; slot < utilitySlots.getCapacity(); slot++) {
             ItemStack item = utilitySlots.getItemStack(slot);
 
-            if(item != null && isHeartCanister(item)) {
-                totalCanisters+=item.getQuantity();
-
-                double bonusHealth = totalCanisters * HEALTH_PER_CONTAINER;
-
-
-                applyHealthBonus(player, bonusHealth);
+            if (item != null && isHeartCanister(item)) {
+                totalCanisters += item.getQuantity();
             }
         }
+
+        double bonusHealth = totalCanisters * HEALTH_PER_CONTAINER;
+        applyHealthBonus(player, bonusHealth);
     }
 
     private void applyHealthBonus(Player player, double bonusHealth) {
@@ -53,19 +55,19 @@ public class HeartAmuletListener {
 
         world.execute(() -> {
             EntityStatMap statMap = (EntityStatMap) store.getComponent(
-                    playerRef, EntityStatMap.getComponentType()
-            );
+                    playerRef, EntityStatMap.getComponentType());
 
-            if(statMap != null) {
+            if (statMap != null) {
                 int healthStat = DefaultEntityStatTypes.getHealth();
-                double currentHealth = statMap.get(healthStat).getIndex();
-                double currentMaxHealth = statMap.get(healthStat).getMax();
 
-                double newMaxHealth = currentMaxHealth + bonusHealth;
-                statMap.setStatValue(healthStat, (float) newMaxHealth);
-
-                if(currentHealth >= currentMaxHealth) {
-                    statMap.setStatValue(healthStat, (float) newMaxHealth);
+                if (bonusHealth > 0) {
+                    StaticModifier modifier = new StaticModifier(
+                            Modifier.ModifierTarget.MAX,
+                            StaticModifier.CalculationType.ADDITIVE,
+                            (float) bonusHealth);
+                    statMap.putModifier(healthStat, MODIFIER_KEY, modifier);
+                } else {
+                    statMap.removeModifier(healthStat, MODIFIER_KEY);
                 }
             }
         });

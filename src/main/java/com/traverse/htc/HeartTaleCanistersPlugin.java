@@ -18,6 +18,7 @@ public class HeartTaleCanistersPlugin extends JavaPlugin {
     @Override
     protected void setup() {
         heartAmuletListener = new HeartAmuletListener();
-        getEventRegistry().registerGlobal(LivingEntityInventoryChangeEvent.class, heartAmuletListener::onInventoryChanged);
+        getEventRegistry().registerGlobal(LivingEntityInventoryChangeEvent.class,
+                heartAmuletListener::onInventoryChanged);
     }
 }
